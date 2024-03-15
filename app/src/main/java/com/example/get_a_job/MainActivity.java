@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     /*Code for fragement functions
     *
     * */
-
+    /*
     public void appliedFrag(View view){
         Applied_jobs applied_jobs = new Applied_jobs();
         FragmentManager fm = getSupportFragmentManager();
@@ -96,4 +96,5 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
+     */
 }
