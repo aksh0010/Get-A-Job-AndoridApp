@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         btn_switch = findViewById(R.id.btn_switch);
         get_userData();
 
+        /*
+        *
+        * :o
+        * */
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
