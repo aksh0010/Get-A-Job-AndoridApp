@@ -36,9 +36,13 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
     public void onBindViewHolder(@NonNull ArrayAdaptor_JobDisplayObject.MyViewHolder holder, int position) {
 
         JobDisplayObject data =datalist.get(position);
-        holder.imageView.setImageResource(data.getImage());
-        holder.textView.setText(data.getText());
-        holder.buttonView.setText(data.getButton());
+        holder.tv_job_name.setText(data.getJob_name());
+        holder.tv_job_company.setText(data.getJob_company());
+        holder.tv_job_location.setText(data.getJob_location());
+        holder.tv_job_applied_date.setText(data.getJob_applied_date());
+//        holder.imageView.setImageResource(data.getImage());
+//        holder.textView.setText(data.getText());
+//        holder.buttonView.setText(data.getButton());
     }
 
     @Override
@@ -48,83 +52,16 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
 
     public class  MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imageView;
-        TextView textView;
-        Button buttonView;
+        TextView tv_job_name,tv_job_company,tv_job_location,tv_job_applied_date;
+
+
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.image_view);
-            textView= itemView.findViewById(R.id.tv_card);
-            buttonView = itemView.findViewById(R.id.tv_button);
-
-            buttonView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    String buttonText = buttonView.getText().toString();
-                    int newColor = Color.WHITE;
-
-                    // Determine the new color based on the current button text
-                    switch (buttonText) {
-                        case "Red":
-                            newColor = Color.RED;
-                            textView.setTextColor(newColor);
-                            buttonView.setText("White");
-                            break;
-                        case "Yellow":
-                            newColor = Color.YELLOW;
-                            textView.setTextColor(newColor);
-                            buttonView.setText("White");
-                            break;
-                        case "Black":
-                            newColor = Color.BLACK;
-                            textView.setTextColor(newColor);
-                            buttonView.setText("White");
-                            break;
-                        case "White":
-                            // for first card
-                            newColor = Color.WHITE;
-                            if (textView.getText().equals("Card1") || textView.getText().equals("Text1"))
-                            {
-                                textView.setTextColor(newColor);
-                                buttonView.setText("Red");
-                            } else   if (textView.getText().equals("Card2") || textView.getText().equals("Text2"))
-                            {
-                                textView.setTextColor(newColor);
-                                buttonView.setText("Yellow");
-                            } else   if (textView.getText().equals("Card3") || textView.getText().equals("Text3"))
-                            {
-                                textView.setTextColor(newColor);
-                                buttonView.setText("Black");
-                            }
-
-                            break;
-                    }
-                }
-            });
-
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(textView.getText().equals("Card1")){
-                        textView.setText("Text1");
-                    } else if (textView.getText().equals("Card2")) {
-                        textView.setText("Text2");
-                    }else if(textView.getText().equals("Card3")){
-                        textView.setText("Text3");
-                    } else
-                    if(textView.getText().equals("Text1")){
-                        textView.setText("Card1");
-                    } else if (textView.getText().equals("Text2")) {
-                        textView.setText("Card2");
-                    }else if(textView.getText().equals("Text3")){
-                        textView.setText("Card4");
-                    }
-
-                }
-            });
+            tv_job_name = itemView.findViewById(R.id.tv_job_name);
+            tv_job_company = itemView.findViewById(R.id.tv_job_company);
+            tv_job_location = itemView.findViewById(R.id.tv_job_location);
+            tv_job_applied_date = itemView.findViewById(R.id.tv_job_applied_date);
 
         }
 

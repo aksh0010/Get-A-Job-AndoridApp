@@ -15,33 +15,52 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
+
         <LinearLayout
             android:id="@+id/lin_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_secondary"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_weight="1" />
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:padding="20dp"
-                android:textColor="#FAF7F7"
-                android:textSize="20sp" />
-            <Button
-                android:id="@+id/tv_button"
+                android:id="@+id/tv_job_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="" />
+                android:text="Software Developer"
+                android:textColor="#FAF7F7"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_job_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IBM"
+                android:textColor="#FAF7F7"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_job_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Toronto,On"
+                android:textColor="#FAF7F7"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_job_applied_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="March 10,2024"
+                android:textColor="#FAF7F7"
+                android:textSize="12sp" />
+
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
