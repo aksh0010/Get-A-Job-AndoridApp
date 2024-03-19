@@ -68,8 +68,7 @@ public class Applied_jobs extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        recylerView = (RecyclerView) recylerView.findViewById(R.id.recyler_job_applied_view);
+        recylerView = (RecyclerView) view.findViewById(R.id.recyler_job_applied_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
 
@@ -80,6 +79,7 @@ public class Applied_jobs extends Fragment {
 
         ArrayAdaptor_JobDisplayObject myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
         recylerView.setAdapter(myAdapter);
+        Log.d("lifec","onViewCreated");
     }
 
     @Override
@@ -87,6 +87,7 @@ public class Applied_jobs extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("test", "Inside Applied job frag");
         // Inflate the layout for this fragment
+        Log.d("lifec","onCreateView");
         return inflater.inflate(R.layout.fragment_applied_jobs, container, false);
     }
 
