@@ -2,11 +2,18 @@ package com.example.get_a_job;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +26,9 @@ public class Saved_jobs extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    RecyclerView recylerView;
+    ArrayList<JobDisplayObject> dataSets= new ArrayList<>();
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -44,6 +54,24 @@ public class Saved_jobs extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recylerView = (RecyclerView) view.findViewById(R.id.recyler_job_saved_view);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recylerView.setLayoutManager(linearLayoutManager);
+
+
+        dataSets.add(new JobDisplayObject("Card1",R.drawable.ic_launcher_background,"Red"));
+        dataSets.add(new JobDisplayObject("Card2",R.drawable.ic_launcher_background,"Yellow"));
+        dataSets.add(new JobDisplayObject("Card3",R.drawable.ic_launcher_background,"Black"));
+
+        ArrayAdaptor_JobDisplayObject myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+        recylerView.setAdapter(myAdapter);
+        Log.d("lifec","onViewCreated Saved_jobs");
+
     }
 
     @Override
