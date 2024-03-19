@@ -6,9 +6,30 @@
     tools:context=".Applied_jobs">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="Hello from applied jobs" />-->
+
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyler_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
+
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyler_job_applied_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello from applied jobs" />
+        >
 
+    </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 </FrameLayout>
