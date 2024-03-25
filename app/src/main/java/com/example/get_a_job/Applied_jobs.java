@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -59,6 +60,7 @@ public class Applied_jobs extends Fragment {
     RecyclerView recyclerView;
     String userEmail;
     ArrayAdaptor_JobDisplayObject myAdapter;
+    TextView tv_noapplied_job_display;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +81,7 @@ public class Applied_jobs extends Fragment {
         recylerView = (RecyclerView) view.findViewById(R.id.recyler_job_applied_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
+        tv_noapplied_job_display = (TextView) view.findViewById(R.id.tv_noapplied_job_display) ;
 //        dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
 //        dataSets.add(new JobDisplayObject("Network Engineer", "Connectivity Services Ltd.", "Calgary, AB", "2024-03-19"));
 
@@ -155,6 +158,11 @@ public class Applied_jobs extends Fragment {
 
                 cursor.close();
                 myAdapter.notifyDataSetChanged();
+            } else {
+                tv_noapplied_job_display.setText("You do not have any applied jobs yet :/");
+                Log.d("test", "no data found: ");
+
+
             }
         }
         else {

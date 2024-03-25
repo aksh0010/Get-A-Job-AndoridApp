@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,12 +61,14 @@ public class Saved_jobs extends Fragment {
     RecyclerView recyclerView;
     String userEmail;
     ArrayAdaptor_JobDisplayObject myAdapter;
+    TextView tv_nodata_display;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recylerView = (RecyclerView) view.findViewById(R.id.recyler_job_saved_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
+        tv_nodata_display = (TextView) view.findViewById(R.id.tv_nosaved_job_display) ;
 /*
         dataSets.add(new JobDisplayObject("Software Developer", "Tech Solutions Inc.", "Toronto, ON", "2024-03-19"));
         dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
@@ -141,9 +145,16 @@ public class Saved_jobs extends Fragment {
 
                 cursor.close();
                 myAdapter.notifyDataSetChanged();
+            } else{
+
+                tv_nodata_display.setText("You do not have any saved jobs yet :/");
+                Log.d("test", "no data found: ");
+
+
             }
         }
         else {
+
 
             Log.d("test", "fetchDataFromDB: useremail is null ");
         }
