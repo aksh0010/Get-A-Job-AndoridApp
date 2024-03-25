@@ -28,9 +28,21 @@ public class MainActivity extends AppCompatActivity {
         btn_submit=findViewById(R.id.btn_submit);
         btn_switch = findViewById(R.id.btn_switch);
         get_userData();
-        DBHelper_user dbHelper = new DBHelper_user(getApplicationContext(),"test_db",null,1);
+        DBHelper dbHelper = new DBHelper(getApplicationContext(),"test_db",null,1);
 
-//        dbHelper.add_user("Aksh","Patel","admin","admin");
+        // Add 10 jobs without the date_posted parameter
+     /*  dbHelper.add_new_Job("Software Engineer", "Exciting opportunity for software engineers!", "Tech Solutions Inc.", "Toronto, ON", "Competitive");
+        dbHelper.add_new_Job("Data Scientist", "Join our team to analyze and interpret complex data.", "Data Insights Co.", "Vancouver, BC", "Negotiable");
+        dbHelper.add_new_Job("Network Administrator", "Manage and maintain computer networks.", "Connectivity Services Ltd.", "Calgary, AB", "Competitive");
+        dbHelper.add_new_Job("Security Analyst", "Identify and prevent security breaches.", "SecureTech Solutions", "Ottawa, ON", "Negotiable");
+        dbHelper.add_new_Job("IT Technician", "Provide technical support to users and troubleshoot issues.", "Resolve IT Services", "Edmonton, AB", "Negotiable");
+        dbHelper.add_new_Job("Web Developer", "Develop and maintain websites and web applications.", "Digital Innovations Corp.", "Montreal, QC", "Competitive");
+        dbHelper.add_new_Job("Systems Analyst", "Analyze and design information systems.", "TechPro Systems", "Winnipeg, MB", "Competitive");
+        dbHelper.add_new_Job("Database Administrator", "Manage and maintain databases.", "DataWare Corporation", "Halifax, NS", "Negotiable");
+        dbHelper.add_new_Job("UI/UX Designer", "Create user-friendly interfaces and design interactive experiences.", "DesignTech Solutions", "Quebec City, QC", "Competitive");
+
+        dbHelper.add_user("Aksh","Patel","admin","admin");
+        */
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 String email = et_username.getText().toString();
                 String password = et_password.getText().toString();
 
-                boolean success =dbHelper.check_login(email,password);
+                boolean success =dbHelper.check_user_login(email,password);
 
                 if(success){
                     Log.d("test", "Hello 7 Inside if part");
                     Toast.makeText(getApplicationContext(),"Logged in Successfully",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(MainActivity.this,App_home_Activity.class);
+                    intent.putExtra("user_email", email);
                     startActivity(intent);
 
                 }

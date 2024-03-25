@@ -72,7 +72,6 @@ public class Applied_jobs extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
 
-
         dataSets.add(new JobDisplayObject("Software Developer", "Tech Solutions Inc.", "Toronto, ON", "2024-03-19"));
         dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
         dataSets.add(new JobDisplayObject("Network Engineer", "Connectivity Services Ltd.", "Calgary, AB", "2024-03-19"));
@@ -94,9 +93,7 @@ public class Applied_jobs extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("test", "Inside Applied job frag");
         // Inflate the layout for this fragment
-        Log.d("lifec","onCreateView");
         return inflater.inflate(R.layout.fragment_applied_jobs, container, false);
     }
-
 
 }
