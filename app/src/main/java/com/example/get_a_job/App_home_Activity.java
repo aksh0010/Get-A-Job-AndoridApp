@@ -15,16 +15,33 @@ public class App_home_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("test", "Inside app home acitivity");
         setContentView(R.layout.activity_app_home);
-    }
 
-    public void appliedFrag(View view){
-        Applied_jobs applied_jobs = new Applied_jobs();
+        // Retrieve extra string from intent
+        String userEmail = getIntent().getStringExtra("user_email");
+        Log.d("test", "User email: " + userEmail);
+
+        // Pass the user email to the Applied_jobs fragment
+        Applied_jobs applied_jobs = Applied_jobs.newInstance(userEmail);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-
         ft.replace(R.id.frame, applied_jobs);
         ft.commit();
     }
+
+    public void appliedFrag(View view){
+        // Retrieve user email from intent
+        String userEmail = getIntent().getStringExtra("user_email");
+
+        // Create a new instance of Applied_jobs fragment with the user email
+        Applied_jobs applied_jobs = Applied_jobs.newInstance(userEmail);
+
+        // Replace the fragment in the frame layout
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame, applied_jobs);
+        ft.commit();
+    }
+
     public void savedFrag(View view){
         Saved_jobs saved_jobs = new Saved_jobs();
         FragmentManager fm = getSupportFragmentManager();

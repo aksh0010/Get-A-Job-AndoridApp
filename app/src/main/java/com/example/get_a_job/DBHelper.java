@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -52,16 +53,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return  db.insert("users",null,contentValues);
 
     }
-    public long add_new_Job(String title, String description,String Company, String location, String salary) {
+    public long add_new_Job(String title, String description,String company, String location, String salary) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("title", title);
         contentValues.put("description", description);
         contentValues.put("location", location);
-        contentValues.put("company", Company);
+        contentValues.put("company", company);
+        contentValues.put("company", company);
         contentValues.put("salary", salary);
 
+        Log.d("test", "DATABASE adding title "+title);
+        Log.d("test", "DATABASE adding comp "+company);
+        Log.d("test", " DATABASE adding loc "+location);
+//        Log.d("test", "DATABASE adding date "+date);
         return db.insert("jobs", null, contentValues);
     }
     // Method to set a job as saved by a user
@@ -101,10 +107,8 @@ public class DBHelper extends SQLiteOpenHelper {
     // Method to get user ID by email
     private int getUserIdByEmail(String user_email) {
         SQLiteDatabase db = getReadableDatabase();
-        Log.d("test", "above query: ");
         String query = "SELECT user_id FROM users WHERE email=?";
         Cursor cursor = db.rawQuery(query, new String[]{user_email});
-        Log.d("test", "after query: ");
         if (cursor.moveToFirst()) {
             int user_id = cursor.getInt(0);
             cursor.close();
@@ -130,10 +134,24 @@ public class DBHelper extends SQLiteOpenHelper {
     // Method to get all applied jobs by a user
     public Cursor getAppliedJobs(String user_email) {
         int user_id = getUserIdByEmail(user_email); // Get user ID from email
-
+        Log.d("test", "inside  DBHELPER getAppliedJobs ");
         if (user_id != -1) { // If user exists
             SQLiteDatabase db = getReadableDatabase();
-            return db.rawQuery("SELECT * FROM applications WHERE user_id=? AND applied_by_user=1", new String[]{String.valueOf(user_id)});
+
+           Cursor cursor= db.rawQuery("SELECT * FROM applications WHERE user_id=? AND applied_by_user=1", new String[]{String.valueOf(user_id)});
+           String data="";
+
+
+            while (cursor.moveToNext()){ // moves on each row
+                // job_id,title,company,location,salary,date,description
+                // moves on each column of single row we can use 0 but thats id in out table
+                data +="Title: " +cursor.getString(1)+" Description: "+cursor.getString(2)+"\n";
+                Log.d("test", "data = "+data);
+            }
+
+
+           Log.d("test", "inside  DBHELPER getAppliedJobs if statement data="+data);
+            return cursor;
         }
 
         return null; // Return null if user doesn't exist
@@ -141,15 +159,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public boolean check_user_login(String user_email, String user_password) {
-        Log.d("test", "Hello ji");
+
         SQLiteDatabase db = getReadableDatabase();
 
         // Corrected query to use parameters safely
         String query = "SELECT password FROM users WHERE email=?";
-        Log.d("test", "Hello 2");
+
 
         Cursor cursor = db.rawQuery(query, new String[]{user_email});
-        Log.d("test", "Hello 3");
+
 
         String result = null;
         if (cursor.moveToFirst()) {
@@ -159,14 +177,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cursor.close(); // closing the cursor after using it
 
-        Log.d("test", "Hello 4");
+
 
         // Check if result is not null before comparing
         if (result != null && result.equals(user_password)) {
-            Log.d("test", "Hello 5- SUccess login");
+
             return true;
         }
-        Log.d("test", "Hello 6- Failure login");
+
         return false;
     }
 

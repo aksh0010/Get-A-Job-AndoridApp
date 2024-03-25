@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
         get_userData();
         DBHelper dbHelper = new DBHelper(getApplicationContext(),"test_db",null,1);
 
+       dbHelper.add_user("admin","admin","admin","admin");
+
         // Add 10 jobs without the date_posted parameter
-     /*  dbHelper.add_new_Job("Software Engineer", "Exciting opportunity for software engineers!", "Tech Solutions Inc.", "Toronto, ON", "Competitive");
+         dbHelper.add_new_Job("Software Engineer", "Exciting opportunity for software engineers!", "Tech Solutions Inc.", "Toronto, ON", "Competitive");
         dbHelper.add_new_Job("Data Scientist", "Join our team to analyze and interpret complex data.", "Data Insights Co.", "Vancouver, BC", "Negotiable");
         dbHelper.add_new_Job("Network Administrator", "Manage and maintain computer networks.", "Connectivity Services Ltd.", "Calgary, AB", "Competitive");
         dbHelper.add_new_Job("Security Analyst", "Identify and prevent security breaches.", "SecureTech Solutions", "Ottawa, ON", "Negotiable");
@@ -41,8 +42,18 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.add_new_Job("Database Administrator", "Manage and maintain databases.", "DataWare Corporation", "Halifax, NS", "Negotiable");
         dbHelper.add_new_Job("UI/UX Designer", "Create user-friendly interfaces and design interactive experiences.", "DesignTech Solutions", "Quebec City, QC", "Competitive");
 
-        dbHelper.add_user("Aksh","Patel","admin","admin");
-        */
+
+        dbHelper.applyJob("admin", 1);
+        dbHelper.applyJob("admin", 2);
+        dbHelper.applyJob("admin", 3);
+        dbHelper.applyJob("admin", 4);
+        dbHelper.applyJob("admin", 5);
+        dbHelper.applyJob("admin", 6);
+        dbHelper.applyJob("admin", 7);
+        dbHelper.applyJob("admin", 8);
+
+
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 boolean success =dbHelper.check_user_login(email,password);
 
                 if(success){
-                    Log.d("test", "Hello 7 Inside if part");
                     Toast.makeText(getApplicationContext(),"Logged in Successfully",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(MainActivity.this,App_home_Activity.class);
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Log.d("test", "Hello 8 Inside else part");
+
                     Toast.makeText(getApplicationContext(),"Login Failed",Toast.LENGTH_LONG).show();
 
                 }
