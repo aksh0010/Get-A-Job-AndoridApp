@@ -1,16 +1,16 @@
 package com.example.get_a_job;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText et_username, et_password;
@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         btn_submit=findViewById(R.id.btn_submit);
         btn_switch = findViewById(R.id.btn_switch);
         get_userData();
+        DBHelper_user dbHelper = new DBHelper_user(getApplicationContext(),"test_db",null,1);
 
+//        dbHelper.add_user("Aksh","Patel","admin","admin");
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,8 +38,26 @@ public class MainActivity extends AppCompatActivity {
                 if(btn_switch.isChecked()){
                     saveUserData();
                 }
-                Intent intent = new Intent(MainActivity.this,App_home_Activity.class);
-                startActivity(intent);
+                String email = et_username.getText().toString();
+                String password = et_password.getText().toString();
+
+                boolean success =dbHelper.check_login(email,password);
+
+                if(success){
+                    Log.d("test", "Hello 7 Inside if part");
+                    Toast.makeText(getApplicationContext(),"Logged in Successfully",Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(MainActivity.this,App_home_Activity.class);
+                    startActivity(intent);
+
+                }
+                else {
+                    Log.d("test", "Hello 8 Inside else part");
+                    Toast.makeText(getApplicationContext(),"Login Failed",Toast.LENGTH_LONG).show();
+
+                }
+
+
             }
         });
 
@@ -69,32 +89,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*Code for fragement functions
-    *
-    * */
-    /*
-    public void appliedFrag(View view){
-        Applied_jobs applied_jobs = new Applied_jobs();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.frame, applied_jobs);
-        ft.commit();
-    }
-    public void savedFrag(View view){
-        Saved_jobs saved_jobs = new Saved_jobs();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, saved_jobs);
-        ft.commit();
-    }
-    public void myselfFrag(View view) {
-        About_Myself about_myself = new About_Myself();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, about_myself);
-        ft.commit();
-    }
-
-     */
 }
