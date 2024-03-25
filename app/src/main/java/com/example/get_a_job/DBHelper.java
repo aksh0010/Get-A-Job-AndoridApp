@@ -87,6 +87,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return -1; // Return -1 indicating failure
     } // Method to set a job as applied by a user
+    public Cursor getAppliedJobs2(String userEmail){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied " +
+                "FROM jobs " +
+                "INNER JOIN applications ON jobs.job_id = applications.job_id " +
+                "INNER JOIN users ON applications.user_id = users.user_id " +
+                "WHERE users.email = ?";
+
+        return db.rawQuery(query,new String[]{userEmail});
+    }
     public long applyJob(String user_email, int job_id) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -132,6 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Method to get all applied jobs by a user
+    @Deprecated
     public Cursor getAppliedJobs(String user_email) {
         int user_id = getUserIdByEmail(user_email); // Get user ID from email
         Log.d("test", "inside  DBHELPER getAppliedJobs ");
@@ -140,8 +151,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
            Cursor cursor= db.rawQuery("SELECT * FROM applications WHERE user_id=? AND applied_by_user=1", new String[]{String.valueOf(user_id)});
            String data="";
+           Cursor cursor_test = db.rawQuery("SELECT * FROM applications",null);
 
-
+           while(cursor_test.moveToNext()){
+               Log.d("testñ", cursor_test.getString(0));
+           }
             while (cursor.moveToNext()){ // moves on each row
                 // job_id,title,company,location,salary,date,description
                 // moves on each column of single row we can use 0 but thats id in out table

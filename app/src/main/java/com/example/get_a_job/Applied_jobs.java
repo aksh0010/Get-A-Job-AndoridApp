@@ -1,6 +1,7 @@
 package com.example.get_a_job;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -118,7 +119,16 @@ public class Applied_jobs extends Fragment {
         if (userEmail != null) {
             Log.d("test", "fetchDataFromDB: inside 1 if ");
             DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
-            Cursor cursor = dbHelper.getAppliedJobs(userEmail);
+            //Cursor cursor = dbHelper.getAppliedJobs(userEmail);
+
+            //SQLiteDatabase db = getReadableDatabase();
+
+             //db.rawQuery(query, new String[]{userEmail});
+            Cursor cursor = dbHelper.getAppliedJobs2(userEmail);
+
+            /*while(join.moveToNext()){
+                Log.d("testñ",join.getString(0)+join.getString(1)+join.getString(2)+join.getString(3)+join.getString(4));
+            }*/
 
             if (cursor != null && cursor.moveToFirst()) {
                 Log.d("test", "fetchDataFromDB: inside 2 if ");
@@ -126,10 +136,13 @@ public class Applied_jobs extends Fragment {
                     // job_id,title,company,location,salary,date,description
 
 
-                    String title = cursor.getString(1);
-                    String company = cursor.getString(2);
-                    String location = cursor.getString(3);
-                    String date = cursor.getString(5);
+                    String title = cursor.getString(0);
+                    //String title = dbHelper.execRawQuery("SELECT title FROM jobs WHERE job_id=?",null);
+
+
+                    String company = cursor.getString(1);
+                    String location = cursor.getString(2);
+                    String date = cursor.getString(3);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
