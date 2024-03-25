@@ -20,7 +20,7 @@ public class App_home_Activity extends AppCompatActivity {
         String userEmail = getIntent().getStringExtra("user_email");
         Log.d("test", "User email: " + userEmail);
 
-        // Pass the user email to the Applied_jobs fragment
+        // By default view for the apphome
         Applied_jobs applied_jobs = Applied_jobs.newInstance(userEmail);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -43,7 +43,15 @@ public class App_home_Activity extends AppCompatActivity {
     }
 
     public void savedFrag(View view){
-        Saved_jobs saved_jobs = new Saved_jobs();
+
+        String userEmail = getIntent().getStringExtra("user_email");
+
+        // Create a new instance of Applied_jobs fragment with the user email
+        Saved_jobs saved_jobs = Saved_jobs.newInstance(userEmail);
+
+
+
+//        Saved_jobs saved_jobs = new Saved_jobs();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame, saved_jobs);

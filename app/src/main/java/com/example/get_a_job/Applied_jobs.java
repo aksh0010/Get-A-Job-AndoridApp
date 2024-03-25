@@ -124,6 +124,8 @@ public class Applied_jobs extends Fragment {
                 Log.d("test", "fetchDataFromDB: inside 2 if ");
                 do {
                     // job_id,title,company,location,salary,date,description
+
+
                     String title = cursor.getString(1);
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
