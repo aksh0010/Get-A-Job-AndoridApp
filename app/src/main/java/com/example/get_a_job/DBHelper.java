@@ -127,6 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return -1; // Return -1 indicating failure
     }
 
+
     // Method to get user ID by email
     private int getUserIdByEmail(String user_email) {
         SQLiteDatabase db = getReadableDatabase();
@@ -223,6 +224,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return db.rawQuery("SELECT * FROM users",null);
     }
+
+    public Cursor display_all_job_Data(){
+
+        SQLiteDatabase db= getReadableDatabase();
+
+        return db.rawQuery("SELECT * FROM jobs",null);
+    }
+
     public long delete_user_data(String email){
 
         SQLiteDatabase db= getWritableDatabase();

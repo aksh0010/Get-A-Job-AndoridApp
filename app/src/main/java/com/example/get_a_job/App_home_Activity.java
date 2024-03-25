@@ -4,17 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class App_home_Activity extends AppCompatActivity {
 
+
+    Button btn_search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("test", "Inside app home acitivity");
         setContentView(R.layout.activity_app_home);
+        btn_search = findViewById(R.id.btn_search);
 
         // Retrieve extra string from intent
         String userEmail = getIntent().getStringExtra("user_email");
@@ -26,6 +31,17 @@ public class App_home_Activity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frame, about_myself);
         ft.commit();
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(App_home_Activity.this,Search_Job_Activity.class);
+                intent.putExtra("user_email", userEmail);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     public void appliedFrag(View view){

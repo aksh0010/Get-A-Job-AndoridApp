@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         get_userData();
         DBHelper dbHelper = new DBHelper(getApplicationContext(),"test_db",null,1);
 
+
+        /// Un comment below only if we need new data
+
+        /*
        dbHelper.add_user("admin","admin","admin","admin");
 
         // Add 10 jobs without the date_posted parameter
@@ -51,11 +55,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.applyJob("admin", 2);
         dbHelper.applyJob("admin", 3);
         dbHelper.applyJob("admin", 4);
-        dbHelper.applyJob("admin", 5);
-        dbHelper.applyJob("admin", 6);
-        dbHelper.applyJob("admin", 7);
-        dbHelper.applyJob("admin", 8);
-
+*/
 
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
