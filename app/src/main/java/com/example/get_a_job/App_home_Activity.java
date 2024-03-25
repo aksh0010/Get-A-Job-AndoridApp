@@ -21,10 +21,10 @@ public class App_home_Activity extends AppCompatActivity {
         Log.d("test", "User email: " + userEmail);
 
         // By default view for the apphome
-        Applied_jobs applied_jobs = Applied_jobs.newInstance(userEmail);
+        About_Myself about_myself = new About_Myself();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, applied_jobs);
+        ft.replace(R.id.frame, about_myself);
         ft.commit();
     }
 
