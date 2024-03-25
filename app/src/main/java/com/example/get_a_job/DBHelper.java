@@ -86,14 +86,27 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return -1; // Return -1 indicating failure
-    } // Method to set a job as applied by a user
+    }
+    public Cursor getSavedJobs2(String userEmail){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied " +
+                "FROM jobs " +
+                "INNER JOIN applications ON jobs.job_id = applications.job_id " +
+                "INNER JOIN users ON applications.user_id = users.user_id " +
+                "WHERE users.email = ? AND applications.saved_by_user = 1";
+
+        return db.rawQuery(query,new String[]{userEmail});
+
+    }
+
+    // Method to set a job as applied by a user
     public Cursor getAppliedJobs2(String userEmail){
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied " +
                 "FROM jobs " +
                 "INNER JOIN applications ON jobs.job_id = applications.job_id " +
                 "INNER JOIN users ON applications.user_id = users.user_id " +
-                "WHERE users.email = ?";
+                "WHERE users.email = ? AND applications.applied_by_user = 1";
 
         return db.rawQuery(query,new String[]{userEmail});
     }
@@ -129,6 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return -1; // Return -1 if user doesn't exist
     }
 
+    @Deprecated
     // Method to get all saved jobs by a user
     public Cursor getSavedJobs(String user_email) {
         int user_id = getUserIdByEmail(user_email); // Get user ID from email

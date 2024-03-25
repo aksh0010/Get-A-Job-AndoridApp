@@ -119,16 +119,16 @@ public class Saved_jobs extends Fragment {
         if (userEmail != null) {
             Log.d("test", "fetchDataFromDB: inside 1 if ");
             DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
-            Cursor cursor = dbHelper.getSavedJobs(userEmail);
+            Cursor cursor = dbHelper.getSavedJobs2(userEmail);
 
             if (cursor != null && cursor.moveToFirst()) {
                 Log.d("test", "fetchDataFromDB: inside 2 if ");
                 do {
                     // job_id,title,company,location,salary,date,description
-                    String title = cursor.getString(1);
-                    String company = cursor.getString(2);
-                    String location = cursor.getString(3);
-                    String date = cursor.getString(5);
+                    String title = cursor.getString(0);
+                    String company = cursor.getString(1);
+                    String location = cursor.getString(2);
+                    String date = cursor.getString(3);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
