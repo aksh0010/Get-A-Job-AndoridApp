@@ -11,8 +11,11 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
     EditText et_username, et_password;
+    FloatingActionButton btn_signin;
     Button btn_submit;
     Switch btn_switch;
     SharedPreferences sharedPreferences ;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         et_password=findViewById(R.id.et_password);
         btn_submit=findViewById(R.id.btn_submit);
         btn_switch = findViewById(R.id.btn_switch);
+        btn_signin = findViewById(R.id.btn_signin);
         get_userData();
         DBHelper dbHelper = new DBHelper(getApplicationContext(),"test_db",null,1);
 
@@ -81,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        btn_signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SigninActivity.class);
+                startActivity(intent);
             }
         });
 
