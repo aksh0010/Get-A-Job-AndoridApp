@@ -1,5 +1,6 @@
 package com.example.get_a_job;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  * Use the {@link Saved_jobs#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Saved_jobs extends Fragment {
+public class Saved_jobs extends Fragment  implements ArrayAdaptor_JobDisplayObject.ItemClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,19 +70,10 @@ public class Saved_jobs extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
         tv_nodata_display = (TextView) view.findViewById(R.id.tv_nosaved_job_display) ;
-/*
-        dataSets.add(new JobDisplayObject("Software Developer", "Tech Solutions Inc.", "Toronto, ON", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Network Engineer", "Connectivity Services Ltd.", "Calgary, AB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Cybersecurity Specialist", "SecureTech Solutions", "Ottawa, ON", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("IT Support Technician", "Resolve IT Services", "Edmonton, AB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Web Developer", "Digital Innovations Corp.", "Montreal, QC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Systems Analyst", "TechPro Systems", "Winnipeg, MB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Database Administrator", "DataWare Corporation", "Halifax, NS", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("UI/UX Designer", "DesignTech Solutions", "Quebec City, QC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Cloud Solutions Architect", "CloudWorks Inc.", "Victoria, BC", "2024-03-19"));
-*/
+
         myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+
+        myAdapter.setItemClickListener(this);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
         Log.d("test","onViewCreated Saved_jobs");
@@ -139,9 +131,6 @@ public class Saved_jobs extends Fragment {
 
 
                     Log.d("test", "adding title "+title);
-                    Log.d("test", "adding comp "+company);
-                    Log.d("test", "adding loc "+location);
-                    Log.d("test", "adding date "+date);
 
                     JobDisplayObject job = new JobDisplayObject(id,title, company, location,salary, date,description);
                     dataSets.add(job);
@@ -171,5 +160,16 @@ public class Saved_jobs extends Fragment {
         args.putString("user_email", userEmail);
         fragment.setArguments(args);
         return fragment;
+    }
+    @Override
+    public void onItemClick(int position) {
+        // Handle click on RecyclerView item
+        JobDisplayObject clickedItem = dataSets.get(position);
+        // Example: Show a toast with the job name
+        Toast.makeText(getActivity(), "Opening " + clickedItem.getJob_title(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getActivity(),View_Job_Activity.class);
+        intent.putExtra("job_id", clickedItem.getJob_id());
+        startActivity(intent);
     }
 }

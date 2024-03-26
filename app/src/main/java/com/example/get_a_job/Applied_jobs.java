@@ -1,5 +1,6 @@
 package com.example.get_a_job;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  * Use the {@link Applied_jobs#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Applied_jobs extends Fragment {
+public class Applied_jobs extends Fragment implements ArrayAdaptor_JobDisplayObject.ItemClickListener   {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,21 +84,9 @@ public class Applied_jobs extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recylerView.setLayoutManager(linearLayoutManager);
         tv_noapplied_job_display = (TextView) view.findViewById(R.id.tv_noapplied_job_display) ;
-//        dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
-//        dataSets.add(new JobDisplayObject("Network Engineer", "Connectivity Services Ltd.", "Calgary, AB", "2024-03-19"));
-
-       /* dataSets.add(new JobDisplayObject("Software Developer", "Tech Solutions Inc.", "Toronto, ON", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Data Analyst", "Data Insights Co.", "Vancouver, BC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Network Engineer", "Connectivity Services Ltd.", "Calgary, AB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Cybersecurity Specialist", "SecureTech Solutions", "Ottawa, ON", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("IT Support Technician", "Resolve IT Services", "Edmonton, AB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Web Developer", "Digital Innovations Corp.", "Montreal, QC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Systems Analyst", "TechPro Systems", "Winnipeg, MB", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Database Administrator", "DataWare Corporation", "Halifax, NS", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("UI/UX Designer", "DesignTech Solutions", "Quebec City, QC", "2024-03-19"));
-        dataSets.add(new JobDisplayObject("Cloud Solutions Architect", "CloudWorks Inc.", "Victoria, BC", "2024-03-19"));
-*/
         myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+
+        myAdapter.setItemClickListener(this);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
 
@@ -122,16 +112,8 @@ public class Applied_jobs extends Fragment {
         if (userEmail != null) {
             Log.d("test", "fetchDataFromDB: inside 1 if ");
             DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
-            //Cursor cursor = dbHelper.getAppliedJobs(userEmail);
+          Cursor cursor = dbHelper.getAppliedJobs2(userEmail);
 
-            //SQLiteDatabase db = getReadableDatabase();
-
-             //db.rawQuery(query, new String[]{userEmail});
-            Cursor cursor = dbHelper.getAppliedJobs2(userEmail);
-
-            /*while(join.moveToNext()){
-                Log.d("testñ",join.getString(0)+join.getString(1)+join.getString(2)+join.getString(3)+join.getString(4));
-            }*/
 
             if (cursor != null && cursor.moveToFirst()) {
                 Log.d("test", "fetchDataFromDB: inside 2 if ");
@@ -150,9 +132,6 @@ public class Applied_jobs extends Fragment {
 
 
                     Log.d("test", "adding title "+title);
-                    Log.d("test", "adding comp "+company);
-                    Log.d("test", "adding loc "+location);
-                    Log.d("test", "adding date "+date);
 
                     JobDisplayObject job = new JobDisplayObject(id,title, company, location,salary, date,description);
                     dataSets.add(job);
@@ -181,5 +160,15 @@ public class Applied_jobs extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    @Override
+    public void onItemClick(int position) {
+        // Handle click on RecyclerView item
+        JobDisplayObject clickedItem = dataSets.get(position);
+        // Example: Show a toast with the job name
+        Toast.makeText(getActivity(), "Opening " + clickedItem.getJob_title(), Toast.LENGTH_SHORT).show();
 
+        Intent intent = new Intent(getActivity(),View_Job_Activity.class);
+        intent.putExtra("job_id", clickedItem.getJob_id());
+        startActivity(intent);
+    }
 }
