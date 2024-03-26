@@ -231,6 +231,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return db.rawQuery("SELECT * FROM jobs",null);
     }
+    public Cursor display_user_search_Data(String query) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        // Use the provided query string with the LIKE statement to search for matching titles or descriptions
+        String sqlQuery = "SELECT * FROM jobs WHERE title LIKE '%" + query + "%' OR description LIKE '%" + query + "%'";
+
+        return db.rawQuery(sqlQuery, null);
+    }
 
     public long delete_user_data(String email){
 
