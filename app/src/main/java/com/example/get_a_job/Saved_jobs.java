@@ -81,7 +81,7 @@ public class Saved_jobs extends Fragment {
         dataSets.add(new JobDisplayObject("UI/UX Designer", "DesignTech Solutions", "Quebec City, QC", "2024-03-19"));
         dataSets.add(new JobDisplayObject("Cloud Solutions Architect", "CloudWorks Inc.", "Victoria, BC", "2024-03-19"));
 */
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
         Log.d("test","onViewCreated Saved_jobs");
@@ -111,7 +111,7 @@ public class Saved_jobs extends Fragment {
         View view = inflater.inflate(R.layout.fragment_saved_jobs, container, false);
         recyclerView = view.findViewById(R.id.recyler_job_saved_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
         recyclerView.setAdapter(myAdapter);
         return view;
 
@@ -133,12 +133,13 @@ public class Saved_jobs extends Fragment {
                     String company = cursor.getString(1);
                     String location = cursor.getString(2);
                     String date = cursor.getString(3);
+                    String id = cursor.getString(5);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());

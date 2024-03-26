@@ -10,6 +10,8 @@ public class JobDisplayObject {
     public String job_location;
     public String job_applied_date;
 
+    public String job_id;
+
 //    public  int image;
 //    public String button;
 
@@ -20,12 +22,12 @@ public class JobDisplayObject {
 //        this.button = btn_text;
 //
 //    }
-    public JobDisplayObject(String name, String company, String location,String date){
+    public JobDisplayObject(String name, String company, String location,String date,String id){
     this.job_name=name;
     this.job_location=location;
     this.job_company=company;
     this.job_applied_date = date;
-
+    this.job_id = id;
     }
 
     public String getJob_applied_date() {
@@ -43,7 +45,12 @@ public class JobDisplayObject {
     public String getJob_company() {
         return job_company;
     }
-//
+
+    public String getJob_id() {
+        return job_id;
+    }
+
+    //
 //    public int getImage() {
 //        return image;
 //    }

@@ -30,8 +30,8 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
         recylerView.setLayoutManager(linearLayoutManager);
         btn_search =findViewById(R.id.btn_search);
         et_search_job = findViewById(R.id.tv_search_job);
-
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
+        String userEmail = getIntent().getStringExtra("user_email");
+        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
         myAdapter.setItemClickListener(this);
@@ -79,12 +79,13 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
                     String date = cursor.getString(5);
+                    String id = cursor.getString(0);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -141,12 +142,13 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
                     String date = cursor.getString(5);
+                    String id = cursor.getString(0);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());

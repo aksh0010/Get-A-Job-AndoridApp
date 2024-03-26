@@ -2,4 +2,5 @@
     <string name="app_name">Get-A-Job</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="link"><a href="google.com">Hello blank fragment</a></string>
 </resources>

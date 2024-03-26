@@ -6,9 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -89,26 +91,66 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public Cursor getSavedJobs2(String userEmail){
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied " +
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied ,applications.application_id " +
                 "FROM jobs " +
                 "INNER JOIN applications ON jobs.job_id = applications.job_id " +
                 "INNER JOIN users ON applications.user_id = users.user_id " +
                 "WHERE users.email = ? AND applications.saved_by_user = 1";
 
         return db.rawQuery(query,new String[]{userEmail});
-
     }
 
     // Method to set a job as applied by a user
     public Cursor getAppliedJobs2(String userEmail){
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied " +
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied , applications.job_id, applications.application_id " +
                 "FROM jobs " +
                 "INNER JOIN applications ON jobs.job_id = applications.job_id " +
                 "INNER JOIN users ON applications.user_id = users.user_id " +
                 "WHERE users.email = ? AND applications.applied_by_user = 1";
 
         return db.rawQuery(query,new String[]{userEmail});
+    }
+    public void markJob(View context,String user_email,String app_id){
+        TextView name = context.findViewById(R.id.tv_job_id);
+        SQLiteDatabase db = getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        int user_id = getUserIdByEmail(user_email);
+        String query = "SELECT applications.saved_by_user " +
+                "FROM applications " +
+                "WHERE applications.user_id = ? AND applications.application_id = ?";
+
+        /**
+         * CREATE TABLE applications (application_id INTEGER PRIMARY KEY AUTOINCREMENT,
+         * applied_by_user INTEGER DEFAULT 0,saved_by_user INTEGER DEFAULT 0,
+         * date_applied TIMESTAMP DEFAULT CURRENT_TIMESTAMP , user_id INTEGER,
+         * job_id INTEGER, FOREIGN KEY(user_id) REFERENCES users(user_id),
+         * FOREIGN KEY(job_id) REFERENCES jobs(job_id))";
+         */
+        Cursor cursor = db.rawQuery(query,new String[]{String.valueOf(user_id),app_id});
+        if (cursor.moveToFirst()) {
+            int is_saved = cursor.getInt(0);
+            Log.d("Gettingg", "is applied? "+is_saved);
+            if (is_saved>=1) {
+                String query2 = "UPDATE applications " +
+                        "SET saved_by_user = 0 " +
+                        "WHERE user_id = ? AND application_id = ?";
+                db.execSQL(query2, new String[]{String.valueOf(user_id), app_id});
+                Toast.makeText(context.getContext(),"The application #" + app_id + " is unsaved now! ",Toast.LENGTH_SHORT).show();
+                Log.d("Gettingg", "The application #" + app_id + " is unsaved now! ");
+            }
+            else{
+                String query3 = "UPDATE applications " +
+                        "SET saved_by_user = 1 " +
+                        "WHERE user_id = ? AND application_id = ?";
+                db.execSQL(query3, new String[]{String.valueOf(user_id), app_id});
+                Toast.makeText(context.getContext(),"The application #" + app_id + " is saved now! ",Toast.LENGTH_SHORT).show();
+                Log.d("Gettingg","The application #"+app_id+" is saved now! ");
+            }
+
+            //Toast.makeText(context.getContext(),"Hello from"+is_applied+"",Toast.LENGTH_SHORT).show();
+        }
     }
     public long applyJob(String user_email, int job_id) {
         SQLiteDatabase db = getWritableDatabase();
