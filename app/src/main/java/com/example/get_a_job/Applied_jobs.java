@@ -139,19 +139,22 @@ public class Applied_jobs extends Fragment {
                     // job_id,title,company,location,salary,date,description
 
 
-                    String title = cursor.getString(0);
-                    //String title = dbHelper.execRawQuery("SELECT title FROM jobs WHERE job_id=?",null);
+                    String id =cursor.getString(0);
+                    String title = cursor.getString(1);
+                    String company = cursor.getString(2);
+                    String location = cursor.getString(3);
+                    String salary= cursor.getString(4);
+//                    String date = cursor.getString(5);
+                    String date = "Date";
+                    String description=  cursor.getString(6);
 
 
-                    String company = cursor.getString(1);
-                    String location = cursor.getString(2);
-                    String date = cursor.getString(3);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(id,title, company, location,salary, date,description);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());

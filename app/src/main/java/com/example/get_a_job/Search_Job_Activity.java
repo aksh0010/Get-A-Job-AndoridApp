@@ -72,19 +72,21 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                     // job_id,title,company,location,salary,date,description
 
 
+                    String id =cursor.getString(0);
                     String title = cursor.getString(1);
-                    //String title = dbHelper.execRawQuery("SELECT title FROM jobs WHERE job_id=?",null);
-
-
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
+                    String salary= cursor.getString(4);
                     String date = cursor.getString(5);
+                    String description=  cursor.getString(6);
+
+
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(id,title, company, location,salary, date,description);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -132,21 +134,23 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                 Log.d("test", "fetchDataFromDB: inside 2 if ");
                 do {
                     // job_id,title,company,location,salary,date,description
-
-
-                    String title = cursor.getString(1);
                     //String title = dbHelper.execRawQuery("SELECT title FROM jobs WHERE job_id=?",null);
 
-
+                    String id =cursor.getString(0);
+                    String title = cursor.getString(1);
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
+                    String salary= cursor.getString(4);
                     String date = cursor.getString(5);
+                    String description=  cursor.getString(6);
+
+
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date);
+                    JobDisplayObject job = new JobDisplayObject(id,title, company, location,salary, date,description);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -170,9 +174,10 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
         // Handle click on RecyclerView item
         JobDisplayObject clickedItem = dataSets.get(position);
         // Example: Show a toast with the job name
-        Toast.makeText(this, "Opening " + clickedItem.getJob_name(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Opening " + clickedItem.getJob_title(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(Search_Job_Activity.this,View_Job_Activity.class);
+        intent.putExtra("job_id", clickedItem.getJob_id());
         startActivity(intent);
     }
 

@@ -5,27 +5,36 @@ package com.example.get_a_job;
 public class JobDisplayObject {
 
 //    public String text;
-    public String job_name;
+    public String job_id;
+    public String job_title;
     public String job_company;
     public String job_location;
+    public String job_salary;
     public String job_applied_date;
+    public String job_description;
 
-//    public  int image;
-//    public String button;
+    // job_id,title,company,location,salary,date,description
 
-//    public JobDisplayObject(String text, int image, String btn_text){
-//
-//        this.image=image;
-//        this.text= text;
-//        this.button = btn_text;
-//
-//    }
-    public JobDisplayObject(String name, String company, String location,String date){
-    this.job_name=name;
+    public JobDisplayObject(String id,String title, String company, String location,String salary,String date,String description){
+    this.job_id=id;
+    this.job_title =title;
     this.job_location=location;
     this.job_company=company;
     this.job_applied_date = date;
+    this.job_salary=salary;
+    this.job_description=description;
+    }
 
+    public String getJob_id() {
+        return job_id;
+    }
+
+    public String getJob_salary() {
+        return job_salary;
+    }
+
+    public String getJob_description() {
+        return job_description;
     }
 
     public String getJob_applied_date() {
@@ -36,20 +45,12 @@ public class JobDisplayObject {
         return job_location;
     }
 
-    public String getJob_name() {
-        return job_name;
+    public String getJob_title() {
+        return job_title;
     }
 
     public String getJob_company() {
         return job_company;
     }
-//
-//    public int getImage() {
-//        return image;
-//    }
-//
-//    public String getText() {
-//        return text;
-//    }
-//    public String getButton(){return  button;}
+
 }
