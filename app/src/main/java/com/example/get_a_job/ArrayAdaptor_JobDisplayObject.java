@@ -21,9 +21,12 @@ import kotlinx.coroutines.Job;
 public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAdaptor_JobDisplayObject.MyViewHolder> {
 
     ArrayList<JobDisplayObject> datalist;
-
+    private ItemClickListener itemClickListener;
     public ArrayAdaptor_JobDisplayObject(ArrayList<JobDisplayObject> data){
         this.datalist =data;
+    }
+    public void setItemClickListener(ItemClickListener listener) {
+        this.itemClickListener = listener;
     }
     @NonNull
     @Override
@@ -43,6 +46,7 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
 //        holder.imageView.setImageResource(data.getImage());
 //        holder.textView.setText(data.getText());
 //        holder.buttonView.setText(data.getButton());
+
     }
 
     @Override
@@ -50,7 +54,7 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
         return datalist.size();
     }
 
-    public class  MyViewHolder extends RecyclerView.ViewHolder{
+    public class  MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView tv_job_name,tv_job_company,tv_job_location,tv_job_applied_date;
 
@@ -63,9 +67,19 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
             tv_job_location = itemView.findViewById(R.id.tv_job_location);
             tv_job_applied_date = itemView.findViewById(R.id.tv_job_applied_date);
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(getAdapterPosition());
+            }
         }
 
 
     }
-
+    public interface ItemClickListener {
+        void onItemClick(int position);
+    }
 }

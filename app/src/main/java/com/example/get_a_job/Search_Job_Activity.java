@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Search_Job_Activity extends AppCompatActivity {
+public class Search_Job_Activity extends AppCompatActivity implements ArrayAdaptor_JobDisplayObject.ItemClickListener   {
     RecyclerView recylerView;
     ArrayAdaptor_JobDisplayObject myAdapter;
     ArrayList<JobDisplayObject> dataSets= new ArrayList<>();
@@ -33,7 +34,7 @@ public class Search_Job_Activity extends AppCompatActivity {
         myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
-
+        myAdapter.setItemClickListener(this);
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +164,16 @@ public class Search_Job_Activity extends AppCompatActivity {
 
             Log.d("test", "fetchDataFromDB: useremail is null ");
         }
+    }
+    @Override
+    public void onItemClick(int position) {
+        // Handle click on RecyclerView item
+        JobDisplayObject clickedItem = dataSets.get(position);
+        // Example: Show a toast with the job name
+        Toast.makeText(this, "Opening " + clickedItem.getJob_name(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(Search_Job_Activity.this,View_Job_Activity.class);
+        startActivity(intent);
     }
 
 }
