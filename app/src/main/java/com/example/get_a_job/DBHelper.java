@@ -206,13 +206,13 @@ public class DBHelper extends SQLiteOpenHelper {
         if (user_id != -1) { // If user exists
             SQLiteDatabase db = getReadableDatabase();
 
-           Cursor cursor= db.rawQuery("SELECT * FROM applications WHERE user_id=? AND applied_by_user=1", new String[]{String.valueOf(user_id)});
-           String data="";
-           Cursor cursor_test = db.rawQuery("SELECT * FROM applications",null);
+            Cursor cursor= db.rawQuery("SELECT * FROM applications WHERE user_id=? AND applied_by_user=1", new String[]{String.valueOf(user_id)});
+            String data="";
+            Cursor cursor_test = db.rawQuery("SELECT * FROM applications",null);
 
-           while(cursor_test.moveToNext()){
-               Log.d("testñ", cursor_test.getString(0));
-           }
+            while(cursor_test.moveToNext()){
+                Log.d("testñ", cursor_test.getString(0));
+            }
             while (cursor.moveToNext()){ // moves on each row
                 // job_id,title,company,location,salary,date,description
                 // moves on each column of single row we can use 0 but thats id in out table
@@ -221,7 +221,7 @@ public class DBHelper extends SQLiteOpenHelper {
             }
 
 
-           Log.d("test", "inside  DBHELPER getAppliedJobs if statement data="+data);
+            Log.d("test", "inside  DBHELPER getAppliedJobs if statement data="+data);
             return cursor;
         }
 
@@ -281,7 +281,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return db.rawQuery(sqlQuery, null);
     }
+    public Cursor display_single_job_Data(String id){
 
+        SQLiteDatabase db= getReadableDatabase();
+
+        return db.rawQuery("SELECT * FROM jobs WHERE job_id=?",new String[]{id});
+    }
     public long delete_user_data(String email){
 
         SQLiteDatabase db= getWritableDatabase();

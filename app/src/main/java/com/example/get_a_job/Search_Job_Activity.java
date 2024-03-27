@@ -176,6 +176,7 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
         Toast.makeText(this, "Opening " + clickedItem.getJob_name(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(Search_Job_Activity.this,View_Job_Activity.class);
+        intent.putExtra("job_id", clickedItem.getJob_id());
         startActivity(intent);
     }
 
