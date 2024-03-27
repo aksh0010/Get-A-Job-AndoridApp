@@ -34,7 +34,7 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
         myAdapter = new ArrayAdaptor_Search_JobDisplayObject(dataSets,userEmail);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
-        myAdapter.setItemClickListener();
+        myAdapter.setItemClickListener(this::onItemClick);
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
