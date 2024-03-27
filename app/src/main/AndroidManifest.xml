@@ -13,6 +13,11 @@
         android:theme="@style/Theme.GetAJob"
         tools:targetApi="31">
         <activity
+            android:name=".Main_drawer"
+            android:exported="false"
+            android:label="@string/title_activity_main_drawer"
+            android:theme="@style/Theme.GetAJob.NoActionBar" />
+        <activity
             android:name=".View_Job_Activity"
             android:exported="false" />
         <activity

@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".App_home_Activity">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <Button
-        android:id="@+id/btn_myself"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="myselfFrag"
-        android:layout_weight="1"
-        android:text="Me" />
-
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="search"
-
- />
-
-    <Button
-        android:id="@+id/btn_applied_jobs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="appliedFrag"
-        android:layout_weight="1"
-        android:text="Applied"
-   />
-
-    <Button
-        android:id="@+id/btn_saved_jobs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="savedFrag"
-        android:layout_weight="1"
-        android:text="saved"
-/>
-
-
-</LinearLayout>
-
-
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_width="410dp"
-        android:layout_height="599dp"
-        android:layout_marginBottom="78dp"
+        android:layout_width="match_parent"
+        android:layout_height="660dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/frame">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_myself"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/myself_icon"
+            android:onClick="myselfFrag"
+            android:text="Me" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/search_icon"
+            android:text="search"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_applied_jobs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/applied_icon"
+            android:onClick="appliedFrag"
+            android:text="Applied" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_saved_jobs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/bookmark_icon"
+            android:onClick="savedFrag"
+            android:text="saved" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

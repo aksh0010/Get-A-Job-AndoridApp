@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -27,6 +28,8 @@ public class About_Myself extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String username;
+    TextView welcome;
     public About_Myself() {
         // Required empty public constructor
     }
@@ -64,8 +67,18 @@ public class About_Myself extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about__myself, container, false);
-
+        Button test = view.findViewById(R.id.about_btn);
         Button logoutButton = view.findViewById(R.id.button);
+        welcome = view.findViewById(R.id.username);
+        username = getArguments().getString("username");
+
+        welcome.setText("Welcome back, "+username);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

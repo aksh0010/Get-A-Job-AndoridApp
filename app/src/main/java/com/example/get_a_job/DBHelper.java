@@ -36,6 +36,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createApplicationsTableQuery);
 
     }
+    public Cursor getUsername(String email){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT users.firstname " +
+                "FROM users " +
+                "WHERE users.email = ?";
+        return db.rawQuery(query,new String[]{email});
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

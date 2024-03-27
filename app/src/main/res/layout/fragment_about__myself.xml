@@ -1,54 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linear_layout"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="143dp"
-        android:layout_height="229dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:scaleType="centerInside"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="156dp"
+
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
         android:src="@drawable/user_default_profile"
-        android:background="@color/white" />
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/link"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="18dp"
+        android:autoSizeTextType="uniform"
+
+        android:gravity="center"
+        android:text="Your name"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="188dp"
+        android:layout_height="143dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis "
+        android:textAlignment="center"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/conf_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
-
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/conf_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:layout_gravity="center"
-        android:text="Configurations" />
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="6dp"
+        android:drawableStart="@drawable/config_icon"
+        android:text="Configurations"
+        app:layout_constraintBottom_toTopOf="@+id/about_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/about_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_gravity="center"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="14dp"
+        android:drawableStart="@drawable/about_icon"
         android:text="About"
-        />
-    <Button
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conf_btn" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Log out " />
-</LinearLayout>
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="103dp"
+        android:drawableStart="@drawable/logout_icon"
+        android:text="Log out "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
