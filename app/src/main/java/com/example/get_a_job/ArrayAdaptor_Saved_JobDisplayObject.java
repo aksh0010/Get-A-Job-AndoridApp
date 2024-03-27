@@ -1,8 +1,6 @@
 package com.example.get_a_job;
 
 
-import android.annotation.SuppressLint;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAdaptor_JobDisplayObject.MyViewHolder> {
+public class ArrayAdaptor_Saved_JobDisplayObject extends RecyclerView.Adapter<ArrayAdaptor_Saved_JobDisplayObject.MyViewHolder> {
 
     ArrayList<JobDisplayObject> datalist;
     private ItemClickListener itemClickListener;
-    public ArrayAdaptor_JobDisplayObject(ArrayList<JobDisplayObject> data, String user_email){
+    Saved_jobs saved_jobs;
+    public ArrayAdaptor_Saved_JobDisplayObject(ArrayList<JobDisplayObject> data, String user_email,Saved_jobs saved_jobs){
         this.datalist =data;
         this.user_email = user_email;
+        this.saved_jobs = saved_jobs;
     }
 
     public ImageView saveImg;
@@ -49,8 +47,7 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
                 String txt = test_v.getText().toString();
                 //Log.d("testñ","tezting#"+id+"");
                 //Log.d("testñ","Want to mark applic #"+id+"");
-                Log.d("testñ","List has been Updated");
-                notifyDataSetChanged();
+                saved_jobs.refreshDataFrom();
                 dbHelper.close();
 
             }
@@ -61,7 +58,7 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
 
     }
     @Override
-    public void onBindViewHolder(@NonNull ArrayAdaptor_JobDisplayObject.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArrayAdaptor_Saved_JobDisplayObject.MyViewHolder holder, int position) {
 
         JobDisplayObject data =datalist.get(position);
         holder.tv_job_name.setText(data.getJob_name());
@@ -69,12 +66,7 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
         holder.tv_job_location.setText(data.getJob_location());
         holder.tv_job_applied_date.setText(data.getJob_applied_date());
         holder.tv_job_id.setText(data.getJob_id());
-        if(data.getIs_applied().equals(1)){
-            holder.saveImg.setImageResource(R.drawable.user_default_profile);
-        }
-        else{
-            holder.saveImg.setImageResource(R.drawable.bookmark);
-        }
+
 //        holder.imageView.setImageResource(data.getImage());
 //        holder.textView.setText(data.getText());
 //        holder.buttonView.setText(data.getButton());

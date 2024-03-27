@@ -1,8 +1,6 @@
 package com.example.get_a_job;
 
 
-import android.annotation.SuppressLint;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAdaptor_JobDisplayObject.MyViewHolder> {
+public class ArrayAdaptor_Search_JobDisplayObject extends RecyclerView.Adapter<ArrayAdaptor_Search_JobDisplayObject.MyViewHolder> {
 
-    ArrayList<JobDisplayObject> datalist;
+    ArrayList<JobDisplay_Search_Object> datalist;
     private ItemClickListener itemClickListener;
-    public ArrayAdaptor_JobDisplayObject(ArrayList<JobDisplayObject> data, String user_email){
+    public ArrayAdaptor_Search_JobDisplayObject(ArrayList<JobDisplay_Search_Object> data, String user_email){
         this.datalist =data;
         this.user_email = user_email;
     }
@@ -61,20 +57,14 @@ public class ArrayAdaptor_JobDisplayObject extends RecyclerView.Adapter<ArrayAda
 
     }
     @Override
-    public void onBindViewHolder(@NonNull ArrayAdaptor_JobDisplayObject.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArrayAdaptor_Search_JobDisplayObject.MyViewHolder holder, int position) {
 
-        JobDisplayObject data =datalist.get(position);
+        JobDisplay_Search_Object data =datalist.get(position);
         holder.tv_job_name.setText(data.getJob_name());
         holder.tv_job_company.setText(data.getJob_company());
         holder.tv_job_location.setText(data.getJob_location());
         holder.tv_job_applied_date.setText(data.getJob_applied_date());
         holder.tv_job_id.setText(data.getJob_id());
-        if(data.getIs_applied().equals(1)){
-            holder.saveImg.setImageResource(R.drawable.user_default_profile);
-        }
-        else{
-            holder.saveImg.setImageResource(R.drawable.bookmark);
-        }
 //        holder.imageView.setImageResource(data.getImage());
 //        holder.textView.setText(data.getText());
 //        holder.buttonView.setText(data.getButton());

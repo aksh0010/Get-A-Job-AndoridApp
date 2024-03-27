@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class Search_Job_Activity extends AppCompatActivity implements ArrayAdaptor_JobDisplayObject.ItemClickListener   {
     RecyclerView recylerView;
-    ArrayAdaptor_JobDisplayObject myAdapter;
-    ArrayList<JobDisplayObject> dataSets= new ArrayList<>();
+    ArrayAdaptor_Search_JobDisplayObject myAdapter;
+    ArrayList<JobDisplay_Search_Object> dataSets= new ArrayList<>();
     Button btn_search;
     EditText et_search_job;
     @Override
@@ -31,10 +31,10 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
         btn_search =findViewById(R.id.btn_search);
         et_search_job = findViewById(R.id.tv_search_job);
         String userEmail = getIntent().getStringExtra("user_email");
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
+        myAdapter = new ArrayAdaptor_Search_JobDisplayObject(dataSets,userEmail);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
-        myAdapter.setItemClickListener(this);
+        myAdapter.setItemClickListener();
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,12 +80,13 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                     String location = cursor.getString(3);
                     String date = cursor.getString(5);
                     String id = cursor.getString(0);
+                    String is_applied = cursor.getString(6);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
+                    JobDisplay_Search_Object job = new JobDisplay_Search_Object(title, company, location, date,id);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -148,7 +149,7 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
+                    JobDisplay_Search_Object job = new JobDisplay_Search_Object(title, company, location, date,id);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -170,7 +171,7 @@ public class Search_Job_Activity extends AppCompatActivity implements ArrayAdapt
     @Override
     public void onItemClick(int position) {
         // Handle click on RecyclerView item
-        JobDisplayObject clickedItem = dataSets.get(position);
+        JobDisplay_Search_Object clickedItem = dataSets.get(position);
         // Example: Show a toast with the job name
         Toast.makeText(this, "Opening " + clickedItem.getJob_name(), Toast.LENGTH_SHORT).show();
 

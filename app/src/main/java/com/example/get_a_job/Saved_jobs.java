@@ -60,7 +60,7 @@ public class Saved_jobs extends Fragment {
     }
     RecyclerView recyclerView;
     String userEmail;
-    ArrayAdaptor_JobDisplayObject myAdapter;
+    ArrayAdaptor_Saved_JobDisplayObject myAdapter;
     TextView tv_nodata_display;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class Saved_jobs extends Fragment {
         dataSets.add(new JobDisplayObject("UI/UX Designer", "DesignTech Solutions", "Quebec City, QC", "2024-03-19"));
         dataSets.add(new JobDisplayObject("Cloud Solutions Architect", "CloudWorks Inc.", "Victoria, BC", "2024-03-19"));
 */
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
+        myAdapter = new ArrayAdaptor_Saved_JobDisplayObject(dataSets,userEmail,this);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
         Log.d("test","onViewCreated Saved_jobs");
@@ -111,15 +111,62 @@ public class Saved_jobs extends Fragment {
         View view = inflater.inflate(R.layout.fragment_saved_jobs, container, false);
         recyclerView = view.findViewById(R.id.recyler_job_saved_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
+        myAdapter = new ArrayAdaptor_Saved_JobDisplayObject(dataSets,userEmail,this);
         recyclerView.setAdapter(myAdapter);
         return view;
 
     }
+    public void refreshDataFrom(){
+        String userEmail = getArguments().getString("user_email");
+        if (userEmail != null) {
+            Log.d("test", "fetchDataFromDB: inside 1 if ");
+            DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
+            Cursor cursor = dbHelper.getSavedJobs2(userEmail);
 
-    private void fetchDataFromDB() {
+            if (cursor != null && cursor.moveToFirst()) {
+                Log.d("test", "fetchDataFromDB: inside 2 if ");
+                Log.d("testñ","muñaño");
+                dataSets.clear();
+                do {
+                    // job_id,title,company,location,salary,date,description
+                    String title = cursor.getString(0);
+                    String company = cursor.getString(1);
+                    String location = cursor.getString(2);
+                    String date = cursor.getString(3);
+                    String id = cursor.getString(5);
+                    String is_applied = cursor.getString(6);
+                    Log.d("test", "adding title "+title);
+                    Log.d("test", "adding comp "+company);
+                    Log.d("test", "adding loc "+location);
+                    Log.d("test", "adding date "+date);
+
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id,is_applied);
+                    dataSets.add(job);
+                    Log.d("test", "adding data "+job);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+                myAdapter.notifyDataSetChanged();
+            } else{
+                dataSets.clear();
+                myAdapter.notifyDataSetChanged();
+                tv_nodata_display.setText("You do not have any saved jobs yet :/");
+                Log.d("test", "no data found: ");
+
+
+            }
+        }
+        else {
+
+
+            Log.d("test", "fetchDataFromDB: useremail is null ");
+        }
+    }
+    public void fetchDataFromDB() {
         Log.d("test", "fetchDataFromDB: ");
         String userEmail = getArguments().getString("user_email");
+        //dataSets = new ArrayList<>();
+
         if (userEmail != null) {
             Log.d("test", "fetchDataFromDB: inside 1 if ");
             DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
@@ -134,12 +181,13 @@ public class Saved_jobs extends Fragment {
                     String location = cursor.getString(2);
                     String date = cursor.getString(3);
                     String id = cursor.getString(5);
+                    String is_applied = cursor.getString(6);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id,is_applied);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
@@ -150,6 +198,7 @@ public class Saved_jobs extends Fragment {
 
                 tv_nodata_display.setText("You do not have any saved jobs yet :/");
                 Log.d("test", "no data found: ");
+                myAdapter.notifyDataSetChanged();
 
 
             }

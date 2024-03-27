@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public Cursor getSavedJobs2(String userEmail){
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied ,applications.application_id " +
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied ,applications.application_id,applications.applied_by_user " +
                 "FROM jobs " +
                 "INNER JOIN applications ON jobs.job_id = applications.job_id " +
                 "INNER JOIN users ON applications.user_id = users.user_id " +
@@ -103,7 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Method to set a job as applied by a user
     public Cursor getAppliedJobs2(String userEmail){
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied , applications.job_id, applications.application_id " +
+        String query = "SELECT jobs.title, jobs.company, jobs.location, jobs.date_posted, applications.date_applied , applications.job_id, applications.application_id, applications.applied_by_user " +
                 "FROM jobs " +
                 "INNER JOIN applications ON jobs.job_id = applications.job_id " +
                 "INNER JOIN users ON applications.user_id = users.user_id " +

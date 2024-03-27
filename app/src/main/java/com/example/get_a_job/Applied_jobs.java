@@ -148,12 +148,13 @@ public class Applied_jobs extends Fragment {
                     String location = cursor.getString(2);
                     String date = cursor.getString(3);
                     String id = cursor.getString(6);
+                    String is_applied = cursor.getString(7);
                     Log.d("test", "adding title "+title);
                     Log.d("test", "adding comp "+company);
                     Log.d("test", "adding loc "+location);
                     Log.d("test", "adding date "+date);
 
-                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id);
+                    JobDisplayObject job = new JobDisplayObject(title, company, location, date,id,is_applied);
                     dataSets.add(job);
                     Log.d("test", "adding data "+job);
                 } while (cursor.moveToNext());
