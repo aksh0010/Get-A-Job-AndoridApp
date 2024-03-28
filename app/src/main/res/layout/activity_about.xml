@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="44dp"
+        android:text="Get a job"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/about"
+        android:layout_width="278dp"
+        android:layout_height="467dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="33dp"
+        android:text="Finding the right job can be a daunting task, but with Get-a-job, your journey to a fulfilling career is simplified. JobQuest is a powerful software designed to streamline your job search process, providing you with the tools and resources you need to secure your dream job."
+        android:textAlignment="textStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="22dp"
+        android:text="Contact info:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="269dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="12dp"
+        android:text="admin@getajob.com"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact" />
+</androidx.constraintlayout.widget.ConstraintLayout>
