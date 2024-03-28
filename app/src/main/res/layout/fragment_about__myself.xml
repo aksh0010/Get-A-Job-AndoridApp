@@ -75,6 +75,7 @@
         android:layout_marginBottom="6dp"
         android:drawableStart="@drawable/config_icon"
         android:text="Configurations"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/about_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"

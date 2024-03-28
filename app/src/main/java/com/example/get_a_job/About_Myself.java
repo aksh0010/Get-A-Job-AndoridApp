@@ -67,16 +67,17 @@ public class About_Myself extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about__myself, container, false);
-        Button test = view.findViewById(R.id.about_btn);
+        Button about_btn = view.findViewById(R.id.about_btn);
         Button logoutButton = view.findViewById(R.id.button);
         welcome = view.findViewById(R.id.username);
         username = getArguments().getString("username");
 
         welcome.setText("Welcome back, "+username);
-        test.setOnClickListener(new View.OnClickListener() {
+        about_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(),About.class);
+                startActivity(intent);
             }
         });
         logoutButton.setOnClickListener(new View.OnClickListener() {

@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.applyJob("admin", 2);
         dbHelper.applyJob("admin", 3);
         dbHelper.applyJob("admin", 4);
-*/
-
+        */
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override

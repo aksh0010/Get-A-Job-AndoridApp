@@ -21,6 +21,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -39,7 +40,8 @@
             android:layout_weight="1"
             android:drawableStart="@drawable/myself_icon"
             android:onClick="myselfFrag"
-            android:text="Me" />
+            android:text="Me"
+            android:textAllCaps="false"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -48,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableStart="@drawable/search_icon"
-            android:text="search"
+            android:text="Search"
+            android:textAllCaps="false"
 
             />
 
@@ -59,7 +62,8 @@
             android:layout_weight="1"
             android:drawableStart="@drawable/applied_icon"
             android:onClick="appliedFrag"
-            android:text="Applied" />
+            android:text="Applied"
+            android:textAllCaps="false"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -69,7 +73,8 @@
             android:layout_weight="1"
             android:drawableStart="@drawable/bookmark_icon"
             android:onClick="savedFrag"
-            android:text="saved" />
+            android:text="Saved"
+            android:textAllCaps="false"/>
 
 
     </LinearLayout>

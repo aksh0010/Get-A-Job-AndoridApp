@@ -39,8 +39,7 @@ public class View_Job_Activity extends AppCompatActivity {
                     String company = cursor.getString(2);
                     String location = cursor.getString(3);
                     String salary = cursor.getString(4);
-//                    String date = cursor.getString(5);
-                    String date = "Date";
+                    String date = cursor.getString(5);
                     String description = cursor.getString(6);
                     tv_view_title.setText(title);
                     tv_view_company.setText(company);

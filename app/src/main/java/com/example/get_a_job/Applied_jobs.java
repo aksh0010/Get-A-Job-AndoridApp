@@ -99,7 +99,6 @@ public class Applied_jobs extends Fragment {
         myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
-
         Log.d("test", "onviewcreated: getting useremail ="+userEmail);
     }
 
@@ -120,6 +119,7 @@ public class Applied_jobs extends Fragment {
     private void fetchDataFromDB() {
         Log.d("test", "fetchDataFromDB: ");
         String userEmail = getArguments().getString("user_email");
+        //gdataSets.clear();
         if (userEmail != null) {
             Log.d("test", "fetchDataFromDB: inside 1 if ");
             DBHelper dbHelper = new DBHelper(getContext(), "test_db", null, 1);
