@@ -1,5 +1,6 @@
 package com.example.get_a_job;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  * Use the {@link Applied_jobs#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Applied_jobs extends Fragment {
+public class Applied_jobs extends Fragment implements ArrayAdaptor_JobDisplayObject.ItemClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,6 +99,7 @@ public class Applied_jobs extends Fragment {
         dataSets.add(new JobDisplayObject("Cloud Solutions Architect", "CloudWorks Inc.", "Victoria, BC", "2024-03-19"));
 */
         myAdapter = new ArrayAdaptor_JobDisplayObject(dataSets,userEmail);
+        myAdapter.setItemClickListener(this);
         recylerView.setAdapter(myAdapter);
         fetchDataFromDB();
         Log.d("test", "onviewcreated: getting useremail ="+userEmail);
@@ -182,4 +185,12 @@ public class Applied_jobs extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onItemClick(int position) {
+        JobDisplayObject clickedItem = dataSets.get(position);
+        Toast.makeText(getActivity(), "Opening "+clickedItem.getJob_name() , Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), View_Job_Activity.class);
+        intent.putExtra("job_id", clickedItem.getJob_id());
+        startActivity(intent);
+    }
 }
